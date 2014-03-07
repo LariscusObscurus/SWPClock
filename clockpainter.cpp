@@ -18,12 +18,13 @@ ClockPainter::~ClockPainter()
 	delete ui;
 }
 
-void ClockPainter::update()
+void ClockPainter::updateObserver()
 {
 	Clock& clock = Clock::getInstance();
 	m_hour = clock.getHours();
 	m_minute = clock.getMinutes();
 	m_second = clock.getSeconds();
+	update();
 }
 
 void ClockPainter::paintEvent(QPaintEvent *)

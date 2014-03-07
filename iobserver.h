@@ -7,7 +7,7 @@ class IObserver
 {
 public:
 	virtual ~IObserver() {}
-	virtual void update() = 0;
+	virtual void updateObserver() = 0;
 };
 
 class ISubject

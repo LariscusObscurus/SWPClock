@@ -23,15 +23,22 @@ public:
 	int getHours();
 
 private:
+	typedef struct time_s {
+		int hours;
+		int minutes;
+		int seconds;
+	} time_t;
+
+	time_t m_time;
+
 	Clock();
 	Clock(const Clock&);
 	Clock &operator = (const Clock&);
 
-	int m_hours;
-	int m_minutes;
-	int m_seconds;
+	QList<IObserver*> m_observer;
+	QList<time_t> m_undoList;
+	QList<time_t> m_redoList;
 
-	QList<IObserver*> m_Observer;
 
 };
 

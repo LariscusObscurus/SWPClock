@@ -16,7 +16,7 @@ public:
 	explicit ClockPainter(QWidget *parent = 0);
 	~ClockPainter();
 
-	virtual void update();
+	virtual void updateObserver();
 
 private:
 	Ui::ClockPainter *ui;
