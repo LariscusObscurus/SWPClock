@@ -13,19 +13,28 @@ Clock& Clock::getInstance()
 	return instance;
 }
 
-void Clock::attach(IObserver &observer)
+void Clock::attach(IObserver *observer)
 {
-
+	m_Observer.append(observer);
 }
 
-void Clock::detach(IObserver &observer)
+void Clock::detach(IObserver *observer)
 {
-
+	m_Observer.removeAll(observer);
 }
 
 void Clock::notify()
 {
+	for(auto& it: m_Observer) {
+		it->update();
+	}
+}
 
+void Clock::set(int hour, int minute, int second)
+{
+	m_hours = hour;
+	m_minutes = minute;
+	m_seconds = second;
 }
 
 void Clock::increment()

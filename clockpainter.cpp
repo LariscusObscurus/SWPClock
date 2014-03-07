@@ -18,7 +18,7 @@ ClockPainter::~ClockPainter()
 	delete ui;
 }
 
-void ClockPainter::update(ISubject &subject)
+void ClockPainter::update()
 {
 	Clock& clock = Clock::getInstance();
 	m_hour = clock.getHours();

@@ -16,13 +16,13 @@ public:
 	explicit ClockPainter(QWidget *parent = 0);
 	~ClockPainter();
 
-	virtual void update(ISubject& subject);
+	virtual void update();
 
 private:
+	Ui::ClockPainter *ui;
 	int m_hour;
 	int m_minute;
 	int m_second;
-	Ui::ClockPainter *ui;
 
 protected:
 	void paintEvent(QPaintEvent *);

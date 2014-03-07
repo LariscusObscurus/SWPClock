@@ -15,12 +15,17 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     clockpainter.cpp \
-    clock.cpp
+    clock.cpp \
+    analogclockwindow.cpp
 
 HEADERS  += mainwindow.h \
     clockpainter.h \
     clock.h \
     iobserver.h \
-    icommand.h
+    icommand.h \
+    analogclockwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    analogclockwindow.ui
+
+QMAKE_CXXFLAGS += -std=c++11
