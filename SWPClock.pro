@@ -16,14 +16,23 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     clockpainter.cpp \
     clock.cpp \
-    analogclockwindow.cpp
+    analogclockwindow.cpp \
+    commandincrement.cpp \
+    commandundo.cpp \
+    commandredo.cpp \
+    commandshow.cpp
 
 HEADERS  += mainwindow.h \
     clockpainter.h \
     clock.h \
     iobserver.h \
     icommand.h \
-    analogclockwindow.h
+    analogclockwindow.h \
+    commandincrement.h \
+    commandundo.h \
+    commandredo.h \
+    commandshow.h \
+    types.h
 
 FORMS    += mainwindow.ui \
     analogclockwindow.ui

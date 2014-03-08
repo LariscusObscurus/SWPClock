@@ -2,7 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "analogclockwindow.h"
+#include "commandincrement.h"
+#include "commandundo.h"
+#include "commandredo.h"
+#include "commandshow.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,9 +28,15 @@ private slots:
 
 	void on_pushButton_4_clicked();
 
+	void on_comboBox_currentIndexChanged(const QString &arg1);
+
 private:
 	Ui::MainWindow *ui;
-	AnalogClockWindow *m_analog;
+
+	CommandIncrement *m_inc;
+	CommandUndo *m_undo;
+	CommandRedo *m_redo;
+	CommandShow *m_show;
 protected:
 	void closeEvent(QCloseEvent *);
 };
