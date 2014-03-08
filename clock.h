@@ -2,25 +2,30 @@
 #define CLOCK_H
 
 #include <iobserver.h>
+#include <QObject>
 #include <QList>
+#include <QTimer>
 
-class Clock : public ISubject
+class Clock : public QObject, public ISubject
 {
+	Q_OBJECT
 public:
+	virtual ~Clock();
 	static Clock& getInstance();
 	virtual void attach(IObserver* observer);
 	virtual void detach(IObserver* observer);
 	virtual void notify();
 
+	int getSeconds();
+	int getMinutes();
+	int getHours();
+
+public slots:
 	void set(int hour, int minute, int second);
 	void increment();
 	void decrement();
 	void undo();
 	void redo();
-	void reset();
-	int getSeconds();
-	int getMinutes();
-	int getHours();
 
 private:
 	typedef struct time_s {
@@ -31,7 +36,7 @@ private:
 
 	time_t m_time;
 
-	Clock();
+	explicit Clock(QObject *parent = 0);
 	Clock(const Clock&);
 	Clock &operator = (const Clock&);
 
@@ -39,6 +44,10 @@ private:
 	QList<time_t> m_undoList;
 	QList<time_t> m_redoList;
 
+	QTimer* m_timer;
+
+private slots:
+	void tick();
 
 };
 

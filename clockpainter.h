@@ -3,11 +3,8 @@
 
 #include <QWidget>
 #include <QPainter>
+#include <QTime>
 #include "iobserver.h"
-
-namespace Ui {
-class ClockPainter;
-}
 
 class ClockPainter : public QWidget, public IObserver
 {
@@ -17,12 +14,11 @@ public:
 	~ClockPainter();
 
 	virtual void updateObserver();
+	void setTimeZoneOffset(int offset);
 
 private:
-	Ui::ClockPainter *ui;
-	int m_hour;
-	int m_minute;
-	int m_second;
+	QTime m_time;
+	int m_offset;
 
 protected:
 	void paintEvent(QPaintEvent *);

@@ -27,12 +27,25 @@ void CommandShow::setClockType(clock_type type)
 	m_clock = type;
 }
 
-void CommandShow::setTimeZone(int offset)
+void CommandShow::setTimeZone(const QString& timezone)
 {
-	m_timezone = offset;
+	if(timezone == "London") {
+		m_timezone = 0;
+	} else if ((timezone == "Paris") || (timezone == "Wien")) {
+		m_timezone = 1;
+	} else if (timezone == "New York") {
+		m_timezone = -6;
+	} else if (timezone == "Tokyo") {
+		m_timezone = 7;
+	}
+	m_analog->setTimeZoneOffset(m_timezone);
+	m_digital->setTimeZoneOffset(m_timezone);
 }
 
 void CommandShow::setCoordinates(int x, int y)
 {
-	m_analog->move(x,y);
+	if(m_clock == ANALOG)
+		m_analog->move(x,y);
+	else
+		m_digital->move(x,y);
 }

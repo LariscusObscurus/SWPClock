@@ -1,29 +1,28 @@
 #include "clockpainter.h"
-#include "ui_clockpainter.h"
 #include "clock.h"
 #include <QColor>
 
 ClockPainter::ClockPainter(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::ClockPainter),
-	m_hour(0),
-	m_minute(0),
-	m_second(0)
+	m_offset(0)
 {
-	ui->setupUi(this);
+
 }
 
 ClockPainter::~ClockPainter()
 {
-	delete ui;
 }
 
 void ClockPainter::updateObserver()
 {
 	Clock& clock = Clock::getInstance();
-	m_hour = clock.getHours();
-	m_minute = clock.getMinutes();
-	m_second = clock.getSeconds();
+	m_time.setHMS(clock.getHours(), clock.getMinutes(),clock.getSeconds());
+	update();
+}
+
+void ClockPainter::setTimeZoneOffset(int offset)
+{
+	m_offset = offset;
 	update();
 }
 
@@ -61,7 +60,7 @@ void ClockPainter::paintEvent(QPaintEvent *)
 	painter.setBrush(hourColor);
 
 	painter.save();
-	painter.rotate(30.0 * ((m_hour + m_minute / 60.0)));
+	painter.rotate(30.0 * ((m_time.hour() + m_offset + m_time.minute() / 60.0)));
 	painter.drawConvexPolygon(hourHand, 3);
 	painter.restore();
 
@@ -77,7 +76,7 @@ void ClockPainter::paintEvent(QPaintEvent *)
 	painter.setBrush(minuteColor);
 
 	painter.save();
-	painter.rotate(6.0 * (m_minute + m_second / 60.0));
+	painter.rotate(6.0 * (m_time.minute() + m_time.second() / 60.0));
 	painter.drawConvexPolygon(minuteHand, 3);
 	painter.restore();
 
@@ -94,7 +93,7 @@ void ClockPainter::paintEvent(QPaintEvent *)
 	painter.setBrush(secondColor);
 
 	painter.save();
-	painter.rotate(6.0 * m_second);
+	painter.rotate(6.0 * m_time.second());
 	painter.drawConvexPolygon(secondHand, 3);
 	painter.restore();
 

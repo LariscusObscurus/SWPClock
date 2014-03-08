@@ -12,7 +12,7 @@ public:
 	virtual ~CommandShow();
 	void execute();
 	void setClockType(clock_type type);
-	void setTimeZone(int offset);
+	void setTimeZone(const QString& timezone);
 	void setCoordinates(int x, int y);
 private:
 	AnalogClockWindow *m_analog;

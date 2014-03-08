@@ -15,3 +15,8 @@ DigitalClockWindow::~DigitalClockWindow()
 	Clock::getInstance().detach(ui->digitalClock);
 	delete ui;
 }
+
+void DigitalClockWindow::setTimeZoneOffset(int offset)
+{
+	ui->digitalClock->setTimeZoneOffset(offset);
+}

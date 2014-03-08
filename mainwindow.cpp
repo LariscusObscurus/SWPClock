@@ -10,16 +10,17 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_inc(new CommandIncrement),
 	m_undo(new CommandUndo),
 	m_redo(new CommandRedo),
-	m_show(new CommandShow)
+	m_show(new CommandShow),
+	m_dec(new CommandDecrement),
+	m_set(new CommandSet)
 {
 	ui->setupUi(this);
-	Clock& clock = Clock::getInstance();
-	QTime time = QDateTime::currentDateTimeUtc().time();
-	clock.set(time.hour(), time.minute(), time.second());
 }
 
 MainWindow::~MainWindow()
 {
+	delete m_set;
+	delete m_dec;
 	delete m_show;
 	delete m_redo;
 	delete m_undo;
@@ -60,4 +61,20 @@ void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
 		m_show->setClockType(clock_type::ANALOG);
 	else
 		m_show->setClockType(clock_type::DIGITAL);
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+	m_dec->execute();
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+	m_set->setHMS(ui->hour->value(), ui->minute->value(), ui->second->value());
+	m_set->execute();
+}
+
+void MainWindow::on_comboBox_2_currentIndexChanged(const QString &arg1)
+{
+	m_show->setTimeZone(arg1);
 }

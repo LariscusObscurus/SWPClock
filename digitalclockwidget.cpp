@@ -2,9 +2,10 @@
 #include "clock.h"
 
 DigitalClockWidget::DigitalClockWidget(QWidget *parent) :
-	QLCDNumber(parent)
+	QLCDNumber(parent),
+	m_offset(0)
 {
-	setSegmentStyle(Filled);
+	setSegmentStyle(Flat);
 }
 
 DigitalClockWidget::~DigitalClockWidget()
@@ -21,6 +22,13 @@ void DigitalClockWidget::updateObserver()
 
 void DigitalClockWidget::showTime()
 {
-	QString text = m_time.toString("hh:mm:ss");
+	QTime timeZoneTime = m_time.addSecs(60 * 60 * m_offset);
+	QString text = timeZoneTime.toString("hh:mm:ss");
 	display(text);
+}
+
+void DigitalClockWidget::setTimeZoneOffset(int offset)
+{
+	m_offset = offset;
+	showTime();
 }

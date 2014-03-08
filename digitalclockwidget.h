@@ -12,8 +12,10 @@ public:
 	explicit DigitalClockWidget(QWidget *parent = 0);
 	~DigitalClockWidget();
 	virtual void updateObserver();
+	void setTimeZoneOffset(int offset);
 private:
 	QTime m_time;
+	int m_offset;
 private slots:
 	void showTime();
 };

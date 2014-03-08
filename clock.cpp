@@ -1,8 +1,19 @@
 #include "clock.h"
+#include "QTime"
 
-Clock::Clock() :
-	m_time {0, 0, 0}
+Clock::Clock(QObject *parent) :
+	QObject(parent),
+	m_timer(new QTimer)
 {
+	QTime time = QDateTime::currentDateTimeUtc().time();
+	m_time = {time.hour(), time.minute(), time.second()};
+	connect(m_timer, SIGNAL(timeout()), this, SLOT(tick()));
+	m_timer->start(1000);
+}
+
+Clock::~Clock()
+{
+	delete m_timer;
 }
 
 Clock& Clock::getInstance()
@@ -30,6 +41,8 @@ void Clock::notify()
 
 void Clock::set(int hour, int minute, int second)
 {
+	m_undoList.append(m_time);
+	m_redoList.clear();
 	m_time.hours = hour % 24;
 	m_time.minutes = minute % 60;
 	m_time.seconds = second % 60;
@@ -40,39 +53,38 @@ void Clock::increment()
 {
 	m_undoList.append(m_time);
 	m_redoList.clear();
-
-	if(m_time.seconds < 59) {
-		m_time.seconds++;
-		notify();
-		return;
-	}
-
-	m_time.seconds = 0;
-
-	if(m_time.minutes < 59) {
-		m_time.minutes++;
-		notify();
-		return;
-	}
-
-	m_time.minutes = 0;
-
-	if(m_time.hours < 24) {
-		m_time.hours++;
-		notify();
-		return;
-	}
-
-	m_time.hours = 0;
-
-	notify();
+	tick();
 }
+
 
 void Clock::decrement()
 {
 
 	m_undoList.append(m_time);
 	m_redoList.clear();
+	if(m_time.seconds != 0) {
+		m_time.seconds--;
+		notify();
+		return;
+	}
+
+	m_time.seconds = 59;
+
+	if(m_time.minutes != 0) {
+		m_time.minutes--;
+		notify();
+		return;
+	}
+
+	m_time.minutes = 59;
+
+	if(m_time.hours != 0) {
+		m_time.hours--;
+		notify();
+		return;
+	}
+
+	m_time.hours = 23;
 	notify();
 }
 
@@ -95,23 +107,47 @@ void Clock::redo()
 	notify();
 }
 
-void Clock::reset()
-{
-
-	m_undoList.append(m_time);
-	m_redoList.clear();
-	notify();
-}
-
 int Clock::getSeconds()
 {
 	return m_time.seconds;
 }
+
 int Clock::getMinutes()
 {
 	return m_time.minutes;
 }
+
 int Clock::getHours()
 {
 	return m_time.hours;
+}
+
+
+void Clock::tick()
+{
+	if(m_time.seconds < 59) {
+		m_time.seconds++;
+		notify();
+		return;
+	}
+
+	m_time.seconds = 0;
+
+	if(m_time.minutes < 59) {
+		m_time.minutes++;
+		notify();
+		return;
+	}
+
+	m_time.minutes = 0;
+
+	if(m_time.hours < 23) {
+		m_time.hours++;
+		notify();
+		return;
+	}
+
+	m_time.hours = 0;
+
+	notify();
 }

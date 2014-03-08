@@ -22,7 +22,9 @@ SOURCES += main.cpp\
     commandredo.cpp \
     commandshow.cpp \
     digitalclockwidget.cpp \
-    digitalclockwindow.cpp
+    digitalclockwindow.cpp \
+    commanddecrement.cpp \
+    commandset.cpp
 
 HEADERS  += mainwindow.h \
     clockpainter.h \
@@ -36,7 +38,9 @@ HEADERS  += mainwindow.h \
     commandshow.h \
     types.h \
     digitalclockwidget.h \
-    digitalclockwindow.h
+    digitalclockwindow.h \
+    commanddecrement.h \
+    commandset.h
 
 FORMS    += mainwindow.ui \
     analogclockwindow.ui \

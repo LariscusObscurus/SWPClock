@@ -6,6 +6,8 @@
 #include "commandundo.h"
 #include "commandredo.h"
 #include "commandshow.h"
+#include "commanddecrement.h"
+#include "commandset.h"
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +32,12 @@ private slots:
 
 	void on_comboBox_currentIndexChanged(const QString &arg1);
 
+	void on_pushButton_5_clicked();
+
+	void on_pushButton_6_clicked();
+
+	void on_comboBox_2_currentIndexChanged(const QString &arg1);
+
 private:
 	Ui::MainWindow *ui;
 
@@ -37,6 +45,8 @@ private:
 	CommandUndo *m_undo;
 	CommandRedo *m_redo;
 	CommandShow *m_show;
+	CommandDecrement *m_dec;
+	CommandSet *m_set;
 protected:
 	void closeEvent(QCloseEvent *);
 };

@@ -15,3 +15,8 @@ AnalogClockWindow::~AnalogClockWindow()
 	Clock::getInstance().detach(ui->analogClock);
 	delete ui;
 }
+
+void AnalogClockWindow::setTimeZoneOffset(int offset)
+{
+	ui->analogClock->setTimeZoneOffset(offset);
+}

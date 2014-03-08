@@ -14,6 +14,7 @@ class DigitalClockWindow : public QDialog
 public:
 	explicit DigitalClockWindow(QWidget *parent = 0);
 	~DigitalClockWindow();
+	void setTimeZoneOffset(int offset);
 
 private:
 	Ui::DigitalClockWindow *ui;

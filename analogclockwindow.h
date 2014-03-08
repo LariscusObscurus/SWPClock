@@ -14,6 +14,7 @@ class AnalogClockWindow : public QDialog
 public:
 	explicit AnalogClockWindow(QWidget *parent = 0);
 	~AnalogClockWindow();
+	void setTimeZoneOffset(int offset);
 
 private:
 	Ui::AnalogClockWindow *ui;
