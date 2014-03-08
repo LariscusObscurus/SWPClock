@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     commandincrement.cpp \
     commandundo.cpp \
     commandredo.cpp \
-    commandshow.cpp
+    commandshow.cpp \
+    digitalclockwidget.cpp \
+    digitalclockwindow.cpp
 
 HEADERS  += mainwindow.h \
     clockpainter.h \
@@ -32,9 +34,12 @@ HEADERS  += mainwindow.h \
     commandundo.h \
     commandredo.h \
     commandshow.h \
-    types.h
+    types.h \
+    digitalclockwidget.h \
+    digitalclockwindow.h
 
 FORMS    += mainwindow.ui \
-    analogclockwindow.ui
+    analogclockwindow.ui \
+    digitalclockwindow.ui
 
 QMAKE_CXXFLAGS += -std=c++11

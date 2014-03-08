@@ -1,6 +1,7 @@
 #ifndef COMMANDSHOW_H
 #define COMMANDSHOW_H
 #include "analogclockwindow.h"
+#include "digitalclockwindow.h"
 #include "icommand.h"
 #include "types.h"
 
@@ -15,7 +16,7 @@ public:
 	void setCoordinates(int x, int y);
 private:
 	AnalogClockWindow *m_analog;
-
+	DigitalClockWindow *m_digital;
 	clock_type m_clock;
 	int m_timezone;
 

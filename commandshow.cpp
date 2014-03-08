@@ -2,6 +2,7 @@
 
 CommandShow::CommandShow() :
 	m_analog(new AnalogClockWindow),
+	m_digital(new DigitalClockWindow),
 	m_clock(ANALOG),
 	m_timezone(0)
 {
@@ -9,12 +10,16 @@ CommandShow::CommandShow() :
 
 CommandShow::~CommandShow()
 {
+	delete m_digital;
 	delete m_analog;
 }
 
 void CommandShow::execute()
 {
-	m_analog->show();
+	if(m_clock == ANALOG)
+		m_analog->show();
+	else
+		m_digital->show();
 }
 
 void CommandShow::setClockType(clock_type type)
