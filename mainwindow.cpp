@@ -12,13 +12,15 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_redo(new CommandRedo),
 	m_show(new CommandShow),
 	m_dec(new CommandDecrement),
-	m_set(new CommandSet)
+	m_set(new CommandSet),
+	m_help(new CommandHelp)
 {
 	ui->setupUi(this);
 }
 
 MainWindow::~MainWindow()
 {
+	delete m_help;
 	delete m_set;
 	delete m_dec;
 	delete m_show;
@@ -77,4 +79,9 @@ void MainWindow::on_pushButton_6_clicked()
 void MainWindow::on_comboBox_2_currentIndexChanged(const QString &arg1)
 {
 	m_show->setTimeZone(arg1);
+}
+
+void MainWindow::on_actionShow_Help_triggered()
+{
+	m_help->execute();
 }

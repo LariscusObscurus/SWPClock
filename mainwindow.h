@@ -8,6 +8,7 @@
 #include "commandshow.h"
 #include "commanddecrement.h"
 #include "commandset.h"
+#include "commandhelp.h"
 
 namespace Ui {
 class MainWindow;
@@ -38,6 +39,8 @@ private slots:
 
 	void on_comboBox_2_currentIndexChanged(const QString &arg1);
 
+	void on_actionShow_Help_triggered();
+
 private:
 	Ui::MainWindow *ui;
 
@@ -47,6 +50,7 @@ private:
 	CommandShow *m_show;
 	CommandDecrement *m_dec;
 	CommandSet *m_set;
+	CommandHelp *m_help;
 protected:
 	void closeEvent(QCloseEvent *);
 };

@@ -24,7 +24,9 @@ SOURCES += main.cpp\
     digitalclockwidget.cpp \
     digitalclockwindow.cpp \
     commanddecrement.cpp \
-    commandset.cpp
+    commandset.cpp \
+    commandhelp.cpp \
+    helpwindow.cpp
 
 HEADERS  += mainwindow.h \
     clockpainter.h \
@@ -40,10 +42,13 @@ HEADERS  += mainwindow.h \
     digitalclockwidget.h \
     digitalclockwindow.h \
     commanddecrement.h \
-    commandset.h
+    commandset.h \
+    commandhelp.h \
+    helpwindow.h
 
 FORMS    += mainwindow.ui \
     analogclockwindow.ui \
-    digitalclockwindow.ui
+    digitalclockwindow.ui \
+    helpwindow.ui
 
 QMAKE_CXXFLAGS += -std=c++11
