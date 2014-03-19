@@ -9,6 +9,7 @@
 #include "commanddecrement.h"
 #include "commandset.h"
 #include "commandhelp.h"
+#include "commandmacro.h"
 
 namespace Ui {
 class MainWindow;
@@ -41,6 +42,8 @@ private slots:
 
 	void on_actionShow_Help_triggered();
 
+	void on_pushButton_7_clicked();
+
 private:
 	Ui::MainWindow *ui;
 
@@ -51,6 +54,7 @@ private:
 	CommandDecrement *m_dec;
 	CommandSet *m_set;
 	CommandHelp *m_help;
+	CommandMacro *m_macro;
 protected:
 	void closeEvent(QCloseEvent *);
 };

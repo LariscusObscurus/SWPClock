@@ -13,13 +13,15 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_show(new CommandShow),
 	m_dec(new CommandDecrement),
 	m_set(new CommandSet),
-	m_help(new CommandHelp)
+	m_help(new CommandHelp),
+	m_macro(new CommandMacro)
 {
 	ui->setupUi(this);
 }
 
 MainWindow::~MainWindow()
 {
+	delete m_macro;
 	delete m_help;
 	delete m_set;
 	delete m_dec;
@@ -84,4 +86,14 @@ void MainWindow::on_comboBox_2_currentIndexChanged(const QString &arg1)
 void MainWindow::on_actionShow_Help_triggered()
 {
 	m_help->execute();
+}
+
+void MainWindow::on_pushButton_7_clicked()
+{
+	m_macro->addCommand(m_inc);
+	m_set->setHMS(0,0,0);
+	m_macro->addCommand(m_set);
+	//m_macro->removeCommand(m_set);
+	m_macro->addCommand(m_help);
+	m_macro->execute();
 }

@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     commanddecrement.cpp \
     commandset.cpp \
     commandhelp.cpp \
-    helpwindow.cpp
+    helpwindow.cpp \
+    commandmacro.cpp
 
 HEADERS  += mainwindow.h \
     clockpainter.h \
@@ -44,7 +45,8 @@ HEADERS  += mainwindow.h \
     commanddecrement.h \
     commandset.h \
     commandhelp.h \
-    helpwindow.h
+    helpwindow.h \
+    commandmacro.h
 
 FORMS    += mainwindow.ui \
     analogclockwindow.ui \
